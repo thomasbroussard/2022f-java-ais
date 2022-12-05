@@ -13,11 +13,13 @@ public class Main {
         // -silver: unit price: 200€, 2 quantity
 
         Customer quentin = new Customer();
-        quentin.address = "Paris";
+        quentin.setAddress("Paris");
         quentin.setName("Quentin Lemouneau");
 
+        System.out.println(quentin);
 
-
+        //    int length = quentin.getInvestmentAccounts().length;
+//
 
     }
 
