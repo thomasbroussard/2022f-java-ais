@@ -3,6 +3,7 @@ package fr.epita.bank;
 import fr.epita.bank.datamodel.Account;
 import fr.epita.bank.datamodel.Customer;
 import fr.epita.bank.datamodel.InvestmentAccount;
+import fr.epita.bank.datamodel.SavingsAccount;
 
 
 import java.util.ArrayList;
@@ -33,9 +34,12 @@ public class Main {
 //        investmentAccountList.add(new InvestmentAccount());
 
 
-
-
-        System.out.println(quentin);
+        SavingsAccount[] savingsAccountsArray = new SavingsAccount[5];
+        SavingsAccount savingsAccount = new SavingsAccount(0.015, new Account(200.0));
+        savingsAccountsArray[0] = savingsAccount;
+        double balance = savingsAccount.getAccount().getBalance();
+        double totalInterests = balance * savingsAccount.getInterestRate();
+        System.out.println("total interests: " + totalInterests);
 
 
     }
