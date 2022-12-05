@@ -1,5 +1,7 @@
 package fr.epita.bank;
 
+import fr.epita.bank.datamodel.Customer;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -9,6 +11,10 @@ public class Main {
         //then we buy from the customer investment account 2 stocks :
         // -gold : unit price: 1000€, 1 quantity
         // -silver: unit price: 200€, 2 quantity
+
+        Customer quentin = new Customer();
+        quentin.address = "Paris";
+        quentin.setName("Quentin Lemouneau");
 
 
 
