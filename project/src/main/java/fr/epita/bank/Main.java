@@ -1,6 +1,13 @@
 package fr.epita.bank;
 
+import fr.epita.bank.datamodel.Account;
 import fr.epita.bank.datamodel.Customer;
+import fr.epita.bank.datamodel.InvestmentAccount;
+
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
@@ -16,10 +23,20 @@ public class Main {
         quentin.setAddress("Paris");
         quentin.setName("Quentin Lemouneau");
 
+        InvestmentAccount[] investmentAccounts = new InvestmentAccount[5];
+
+        investmentAccounts[0] = new InvestmentAccount(new Account(200.0));
+        quentin.setInvestmentAccounts(investmentAccounts);
+
+        //if someone wants a list, look hereafter:
+//        List<InvestmentAccount> investmentAccountList = new ArrayList<>();
+//        investmentAccountList.add(new InvestmentAccount());
+
+
+
+
         System.out.println(quentin);
 
-        //    int length = quentin.getInvestmentAccounts().length;
-//
 
     }
 
