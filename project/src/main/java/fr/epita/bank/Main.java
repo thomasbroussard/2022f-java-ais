@@ -61,6 +61,8 @@ public class Main {
 
         placedOrders.add(goldStockOrder);
 
+        CSVService.write(goldStockOrder);
+
         // FIXME check the commission calculation
         StockOrder silverStockOrder = new StockOrder(silverStock,
                 quentin.getInvestmentAccounts()[0],
@@ -71,6 +73,9 @@ public class Main {
         );
 
         placedOrders.add(silverStockOrder);
+
+        CSVService.write(silverStockOrder);
+
 
     }
 
