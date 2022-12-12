@@ -1,9 +1,6 @@
 package fr.epita.bank;
 
-import fr.epita.bank.datamodel.Account;
-import fr.epita.bank.datamodel.Customer;
-import fr.epita.bank.datamodel.InvestmentAccount;
-import fr.epita.bank.datamodel.SavingsAccount;
+import fr.epita.bank.datamodel.*;
 
 
 import java.util.ArrayList;
@@ -11,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
+
+    private static List<StockOrder> placedOrders;
 
     public static void main(String[] args) {
         //initialize a customer with 2 accounts, 1 saving, 1 investment, initialized respectively with 200€.
@@ -40,6 +39,48 @@ public class Main {
         double balance = savingsAccount.getAccount().getBalance();
         double totalInterests = balance * savingsAccount.getInterestRate();
         System.out.println("total interests: " + totalInterests);
+
+
+        Stock goldStock = new Stock("gold");
+        goldStock.setCurrentValue(1000.0);
+
+        Stock silverStock = new Stock("silver");
+        silverStock.setCurrentValue(200.0);
+
+
+        placedOrders = new ArrayList<>();
+
+        // FIXME check the commission calculation
+        StockOrder goldStockOrder = new StockOrder(goldStock,
+                quentin.getInvestmentAccounts()[0],
+                "2022-12-01",
+                goldStock.getCurrentValue(),
+                1,
+                10
+        );
+
+        placedOrders.add(goldStockOrder);
+
+
+        // FIXME check the commission calculation
+        StockOrder silverStockOrder = new StockOrder(silverStock,
+                quentin.getInvestmentAccounts()[0],
+                "2022-12-01",
+                silverStock.getCurrentValue(),
+                2,
+                1
+        );
+
+        placedOrders.add(silverStockOrder);
+
+
+
+
+
+
+
+
+
 
 
     }
