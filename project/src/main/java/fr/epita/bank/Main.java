@@ -1,8 +1,11 @@
 package fr.epita.bank;
 
 import fr.epita.bank.datamodel.*;
+import fr.epita.bank.exceptions.CSVServiceInitializationException;
+import fr.epita.bank.services.CSVService;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,7 +64,16 @@ public class Main {
 
         placedOrders.add(goldStockOrder);
 
-        CSVService.write(goldStockOrder);
+        File outputFile = new File("test.csv");
+        CSVService service = null;
+        try {
+            service = new CSVService(outputFile);
+        } catch (CSVServiceInitializationException e) {
+            System.out.println("problem while initializing data storage");
+            // TODO try to recover by asking a new path from the user.
+        }
+
+        service.write(goldStockOrder);
 
         // FIXME check the commission calculation
         StockOrder silverStockOrder = new StockOrder(silverStock,
@@ -74,7 +86,7 @@ public class Main {
 
         placedOrders.add(silverStockOrder);
 
-        CSVService.write(silverStockOrder);
+        service.write(silverStockOrder);
 
 
     }
