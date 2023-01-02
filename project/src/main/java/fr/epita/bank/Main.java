@@ -4,10 +4,8 @@ import fr.epita.bank.datamodel.*;
 import fr.epita.bank.exceptions.CSVServiceInitializationException;
 import fr.epita.bank.services.CSVService;
 
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -87,7 +85,6 @@ public class Main {
         placedOrders.add(silverStockOrder);
 
         service.write(silverStockOrder);
-
 
     }
 

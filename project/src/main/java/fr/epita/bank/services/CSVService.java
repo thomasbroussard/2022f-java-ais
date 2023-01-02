@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 public class CSVService {
 
@@ -27,8 +28,10 @@ public class CSVService {
     public void write(StockOrder stockOrder) {
         try {
             String content = Files.readString(outputFile.toPath());
+            String newLine = System.getProperty("line.separator");
             if (content.isBlank()){
-                String headers = "stockRef, accountRef, date, value, quantity, commission" + System.getProperty("line.separator");
+
+                String headers = "stockRef, accountRef, date, value, quantity, commission" + newLine;
                 Files.writeString(outputFile.toPath(), headers);
             }
             String line = stockOrder.getRefStock().getName() +","
@@ -36,7 +39,7 @@ public class CSVService {
                     + stockOrder.getDate() + ","
                     + stockOrder.getUnitPrice() + ","
                     + stockOrder.getQuantity() + ","
-                    + stockOrder.getCommission();
+                    + stockOrder.getCommission() + newLine;
 
             Files.writeString(outputFile.toPath(), line, StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -44,5 +47,9 @@ public class CSVService {
         }
 
 
+    }
+
+    public List<StockOrder> readStockOrders() {
+        return null;
     }
 }

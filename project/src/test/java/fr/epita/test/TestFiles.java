@@ -12,7 +12,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class TestFiles {
@@ -29,6 +31,36 @@ public class TestFiles {
         // 3. verification - then
 
         // 4. clean
+    }
+
+
+    @Test
+    public void testOpenReadSplit() throws IOException {
+        File file = new File("test.csv");
+        List<String> lines = Files.readAllLines(file.toPath());
+
+        List<StockOrder> stockOrders = new ArrayList<>();
+        for (String line : lines){
+            String[] parts = line.split(",");
+
+
+            String refStockName = parts[0];
+            String accountId = parts[1];
+            String stockOrderDate = parts[2];
+            String stockOrderUnitPrice = parts[3];
+            String stockOrderQuantity = parts[4];
+            String stockOrderCommission = parts[5];
+
+            Account account = new Account(0);
+            account.setId(Integer.parseInt(accountId));
+            InvestmentAccount investmentAccount = new InvestmentAccount(account);
+
+            StockOrder stockOrder = new StockOrder(,investmentAccount);
+            stockOrders.add(stockOrder);
+
+        }
+        System.out.println(stockOrders);
+
     }
 
     @Test
