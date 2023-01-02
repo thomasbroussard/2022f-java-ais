@@ -38,12 +38,15 @@ public class TestFiles {
     public void testOpenReadSplit() throws IOException {
         File file = new File("test.csv");
         List<String> lines = Files.readAllLines(file.toPath());
-
         List<StockOrder> stockOrders = new ArrayList<>();
+        if (lines.isEmpty()){
+            System.out.println("the file is empty");
+            return;
+        }
+        lines.remove(0);
+
         for (String line : lines){
             String[] parts = line.split(",");
-
-
             String refStockName = parts[0];
             String accountId = parts[1];
             String stockOrderDate = parts[2];
@@ -55,9 +58,15 @@ public class TestFiles {
             account.setId(Integer.parseInt(accountId));
             InvestmentAccount investmentAccount = new InvestmentAccount(account);
 
-            StockOrder stockOrder = new StockOrder(,investmentAccount);
-            stockOrders.add(stockOrder);
+            Stock stock = new Stock(refStockName);
 
+            StockOrder stockOrder = new StockOrder(stock,investmentAccount,
+                    stockOrderDate,
+                    Double.parseDouble(stockOrderUnitPrice),
+                    Integer.parseInt(stockOrderQuantity),
+                    Double.parseDouble(stockOrderCommission)
+            );
+            stockOrders.add(stockOrder);
         }
         System.out.println(stockOrders);
 

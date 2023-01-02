@@ -72,4 +72,17 @@ public class StockOrder {
     public void setCommission(double commission) {
         this.commission = commission;
     }
+
+
+    @Override
+    public String toString() {
+        return "StockOrder{" +
+                "refStock=" + refStock +
+                ", account=" + account +
+                ", date='" + date + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", quantity=" + quantity +
+                ", commission=" + commission +
+                '}';
+    }
 }
