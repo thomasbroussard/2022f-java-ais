@@ -45,7 +45,7 @@ public class PassengerCSVService {
                 passengers.add(passenger);
             }catch (Exception e){
                 ;
-                System.out.println(e.getMessage() + " in line " + line);
+            //    System.out.println(e.getMessage() + " in line " + line);
             }
         }
         return passengers;

@@ -84,5 +84,28 @@ public class TitanicCSVLoadingTest {
         Map<Double, List<Passenger>> collect = completePassengersList
                 .stream()
                 .collect(Collectors.groupingBy(passenger -> passenger.getAge()));
+
+        System.out.println(collect);
+    }
+
+    @Test
+    public void testGroupingBySex() throws IOException {
+        //given
+        File csvFile = new File("titanic-dataset/data.csv");// load the file
+        PassengerCSVService passengerCSVService = new PassengerCSVService(csvFile); // create PassengerCSVService
+        List<Passenger> completePassengersList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
+
+        Double averageAge = completePassengersList
+                .stream()
+                .mapToDouble(Passenger::getAge)
+                .average()
+                .getAsDouble();
+
+        Map<Integer, Integer> groupBySexCount = new LinkedHashMap<>();
+        for (Passenger passenger : completePassengersList) {
+            Integer count = groupBySexCount.getOrDefault(passenger.getSex(), 0) + 1;
+            groupBySexCount.put(passenger.getSex(), count);
+        }
+        System.out.println(groupBySexCount);
     }
 }
