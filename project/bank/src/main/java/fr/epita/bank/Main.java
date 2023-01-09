@@ -1,5 +1,6 @@
 package fr.epita.bank;
 
+import bank.datamodel.*;
 import fr.epita.bank.datamodel.*;
 import fr.epita.bank.exceptions.CSVServiceInitializationException;
 import fr.epita.bank.services.CSVService;

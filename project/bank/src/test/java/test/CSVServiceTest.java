@@ -1,4 +1,4 @@
-package fr.epita.test;
+package test;
 
 import fr.epita.bank.datamodel.Account;
 import fr.epita.bank.datamodel.InvestmentAccount;
@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CSVServiceTest {
 

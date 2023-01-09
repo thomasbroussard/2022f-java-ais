@@ -1,7 +1,6 @@
 package fr.epita.bank.datamodel;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Customer {
 

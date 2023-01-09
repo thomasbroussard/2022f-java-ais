@@ -1,7 +1,7 @@
 package fr.epita.bank.services;
 
-import fr.epita.bank.datamodel.Account;
 import fr.epita.bank.datamodel.InvestmentAccount;
+import fr.epita.bank.datamodel.Account;
 import fr.epita.bank.datamodel.Stock;
 import fr.epita.bank.datamodel.StockOrder;
 import fr.epita.bank.exceptions.CSVServiceInitializationException;

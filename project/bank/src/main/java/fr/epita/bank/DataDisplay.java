@@ -1,8 +1,8 @@
 package fr.epita.bank;
 
+import fr.epita.bank.services.CSVService;
 import fr.epita.bank.datamodel.StockOrder;
 import fr.epita.bank.exceptions.CSVServiceInitializationException;
-import fr.epita.bank.services.CSVService;
 
 import java.io.File;
 import java.util.List;
