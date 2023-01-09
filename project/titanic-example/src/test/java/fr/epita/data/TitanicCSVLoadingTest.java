@@ -1,7 +1,11 @@
 package fr.epita.data;
 
+import fr.epita.data.datamodel.Passenger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.util.List;
 
 public class TitanicCSVLoadingTest {
 
@@ -9,7 +13,7 @@ public class TitanicCSVLoadingTest {
     @Test
     public void testLoadCsv(){
         //given
-        File csvFile = ...;// load the file
+        File csvFile = new File("titanic-dataset/data.csv");// load the file
 
 
         //when
