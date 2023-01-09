@@ -21,11 +21,26 @@ public class PassengerCSVService {
             String[] passengerParts = line.split(";");
             Passenger passenger = new Passenger();
             passenger.setName(passengerParts[0]);
-            passenger.setpClass(passengerParts[1]);
+            Integer pclass = encodePclass(passengerParts[1].trim());
+            passenger.setpClass(pclass);
             passenger.setAge(Double.parseDouble(passengerParts[2]));
             passenger.setSex(passengerParts[3]);
             passenger.setSurvived(Integer.parseInt(passengerParts[4]));
 
         }
+    }
+
+    private static Integer encodePclass(String passengerClass) {
+        Integer pclass;
+        if ("1st".equals(passengerClass)){
+           pclass = 1;
+        } else if ("2nd".equals(passengerClass)){
+           pclass = 2;
+        } else if ("3rd".equals(passengerClass)){
+            pclass = 3;
+        } else {
+            pclass = 4;
+        }
+        return pclass;
     }
 }
