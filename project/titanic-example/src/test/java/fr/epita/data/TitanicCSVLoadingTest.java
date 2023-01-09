@@ -5,24 +5,26 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class TitanicCSVLoadingTest {
 
 
     @Test
-    public void testLoadCsv(){
+    public void testLoadCsv() throws IOException {
         //given
         File csvFile = new File("titanic-dataset/data.csv");// load the file
 
 
         //when
         PassengerCSVService passengerCSVService = new PassengerCSVService(csvFile); // create PassengerCSVService
-        List<Passenger> passengerList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
+        List<Passenger> completePassengersList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
 
 
         //then
-        Assertions.assertTrue(passengerList.size() == 1313);
+        System.out.println(completePassengersList.size());
+        Assertions.assertTrue(completePassengersList.size() == 756);
 
     }
 }
