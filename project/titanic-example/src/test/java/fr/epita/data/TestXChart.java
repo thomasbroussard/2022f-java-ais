@@ -8,13 +8,14 @@ import org.knowm.xchart.style.Styler;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestXChart {
 
 
     public static void main(String[] args) throws IOException {
-        CategoryChart chart = TestXChart.getSurvivedDistributionPerClass();
-        new SwingWrapper<>(chart).displayChart();
+//        CategoryChart chart = TestXChart.getSurvivedDistributionPerClass();
+        new SwingWrapper<>(getScatterChart()).displayChart();
     }
 
 
@@ -90,6 +91,56 @@ public class TestXChart {
 
 
     }
+
+    public static XYChart getScatterChart() throws IOException {
+
+        // Create Chart
+        XYChart chart = new XYChartBuilder().width(800).height(600).build();
+
+        // Customize Chart
+        chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        chart.getStyler().setChartTitleVisible(false);
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
+        chart.getStyler().setMarkerSize(8);
+
+        File csvFile = new File("titanic-example/titanic-dataset/data.csv");// load the file
+        PassengerCSVService passengerCSVService = new PassengerCSVService(csvFile); // create PassengerCSVService
+        List<Passenger> completePassengersList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
+
+
+
+        Map<Integer, List<Passenger>> passengersBySurvival = completePassengersList.stream().collect(Collectors.groupingBy(p -> p.getSurvived()));
+
+        List<Passenger>  survivedPassengers = passengersBySurvival.get(1);
+        List<Passenger> notSurvivedPassengers = passengersBySurvival.get(0);
+
+        List<Integer> survivedClassData = new LinkedList<>();
+        List<Double> survivedAgeData = new LinkedList<>();
+        survivedPassengers.forEach(
+                p -> {
+                    survivedClassData.add(p.getSex());
+                    survivedAgeData.add(p.getAge());
+                }
+        );
+        List<Integer> notSurvivedClassData = new LinkedList<>();
+        List<Double> notSurvivedAgeData = new LinkedList<>();
+        notSurvivedPassengers.forEach(
+                p -> {
+                    notSurvivedClassData.add(p.getSex());
+                    notSurvivedAgeData.add(p.getAge());
+                }
+        );
+
+        // Series
+
+
+
+        chart.addSeries("survived passengers", survivedClassData, survivedAgeData);
+        chart.addSeries("not survived passengers", notSurvivedClassData, notSurvivedAgeData);
+
+        return chart;
+    }
+
 
     private static List<Double> getGaussianData(int count) {
 
