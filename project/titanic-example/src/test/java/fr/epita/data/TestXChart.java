@@ -26,7 +26,7 @@ public class TestXChart {
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
 
         // Series
-        chart.addSeries("test 1", Arrays.asList(new Integer[] { 0, 1, 2, 3, 4 }), Arrays.asList(new Integer[] { 4, 5, 9, 6, 5 }));
+        chart.addSeries("test 1", Arrays.asList("1st Class","2nd Class", "3rd Class", "Other"), Arrays.asList(new Integer[] { 4, 5, 9, 6 }));
 
         return chart;
     }
