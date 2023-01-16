@@ -1,24 +1,43 @@
 package fr.epita.data;
 
+import fr.epita.data.datamodel.Passenger;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 public class TestXChart {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         CategoryChart chart = TestXChart.getChart();
         new SwingWrapper<>(chart).displayChart();
     }
 
 
-    public static CategoryChart getChart() {
+    public static CategoryChart getChart() throws IOException {
+
+
+        //given
+        File csvFile = new File("titanic-example/titanic-dataset/data.csv");// load the file
+        PassengerCSVService passengerCSVService = new PassengerCSVService(csvFile); // create PassengerCSVService
+        List<Passenger> completePassengersList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
+
+        Map<Integer, Integer> groupByPclassCount = new LinkedHashMap<>();
+        for (Passenger passenger : completePassengersList) {
+            Integer count = groupByPclassCount.get(passenger.getpClass());
+            if (count == null) {
+                count = 1;
+            } else {
+                count++;
+            }
+            groupByPclassCount.put(passenger.getpClass(), count);
+        }
+
+        System.out.println(groupByPclassCount);
         // Create Chart
         CategoryChart chart = new CategoryChartBuilder().width(800).height(600).title("Score Histogram").xAxisTitle("Score").yAxisTitle("Number").build();
 
@@ -26,9 +45,13 @@ public class TestXChart {
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
 
         // Series
-        chart.addSeries("test 1", Arrays.asList("1st Class","2nd Class", "3rd Class", "Other"), Arrays.asList(new Integer[] { 4, 5, 9, 6 }));
+//        chart.addSeries("test 1", Arrays.asList("1st Class","2nd Class", "3rd Class", "Other"), Arrays.asList(new Integer[] { 4, 5, 9, 6 }));
+        chart.addSeries("total number of passengers per passenger class", new ArrayList<>(groupByPclassCount.keySet()), new ArrayList<>(groupByPclassCount.values()));
 
         return chart;
+
+
+
     }
 
     private static List<Double> getGaussianData(int count) {
