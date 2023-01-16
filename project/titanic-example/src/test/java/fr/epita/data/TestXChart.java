@@ -13,7 +13,7 @@ public class TestXChart {
 
 
     public static void main(String[] args) throws IOException {
-        CategoryChart chart = TestXChart.getChart();
+        CategoryChart chart = TestXChart.getSurvivedDistributionPerClass();
         new SwingWrapper<>(chart).displayChart();
     }
 
@@ -65,12 +65,11 @@ public class TestXChart {
         Map<Integer, Integer> survivedCount = new LinkedHashMap<>();
         Map<Integer, Integer> notSurvivedCount = new LinkedHashMap<>();
         for (Passenger passenger : completePassengersList) {
+            Integer pclass = passenger.getpClass();
             if (passenger.getSurvived() == 0) {
-                Integer pclass = passenger.getpClass();
-                Integer currentCountForClass = notSurvivedCount.getOrDefault(pclass, 0);
-                notSurvivedCount.put(pclass, currentCountForClass++);
+                notSurvivedCount.put(pclass,notSurvivedCount.getOrDefault(pclass, 0) + 1);
             } else {
-
+                survivedCount.put(pclass,survivedCount.getOrDefault(pclass, 0) + 1);
             }
         }
 
