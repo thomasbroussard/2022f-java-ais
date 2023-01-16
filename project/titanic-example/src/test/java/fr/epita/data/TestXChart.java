@@ -54,6 +54,44 @@ public class TestXChart {
 
     }
 
+    public static CategoryChart getSurvivedDistributionPerClass() throws IOException {
+
+
+        //given
+        File csvFile = new File("titanic-example/titanic-dataset/data.csv");// load the file
+        PassengerCSVService passengerCSVService = new PassengerCSVService(csvFile); // create PassengerCSVService
+        List<Passenger> completePassengersList = passengerCSVService.readAll(); // create Passenger datamodel + readAll() method
+
+        Map<Integer, Integer> survivedCount = new LinkedHashMap<>();
+        Map<Integer, Integer> notSurvivedCount = new LinkedHashMap<>();
+        for (Passenger passenger : completePassengersList) {
+            if (passenger.getSurvived() == 0) {
+                Integer pclass = passenger.getpClass();
+                Integer currentCountForClass = notSurvivedCount.getOrDefault(pclass, 0);
+                notSurvivedCount.put(pclass, currentCountForClass++);
+            } else {
+
+            }
+        }
+
+        System.out.println(notSurvivedCount);
+        // Create Chart
+        CategoryChart chart = new CategoryChartBuilder().width(800).height(600).title("Score Histogram").xAxisTitle("Score").yAxisTitle("Number").build();
+
+        // Customize Chart
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
+
+        // Series
+//        chart.addSeries("test 1", Arrays.asList("1st Class","2nd Class", "3rd Class", "Other"), Arrays.asList(new Integer[] { 4, 5, 9, 6 }));
+        chart.addSeries("not survived passenger", new ArrayList<>(notSurvivedCount.keySet()), new ArrayList<>(notSurvivedCount.values()));
+        chart.addSeries("survived passenger", new ArrayList<>(survivedCount.keySet()), new ArrayList<>(survivedCount.values()));
+
+        return chart;
+
+
+
+    }
+
     private static List<Double> getGaussianData(int count) {
 
         List<Double> data = new ArrayList<Double>(count);
